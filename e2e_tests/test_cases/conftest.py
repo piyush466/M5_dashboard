@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
 from utilities.configpar import ConfigReader
+import os
 
 
 def pytest_addoption(parser):
@@ -35,24 +36,49 @@ def setup(request):
         base_url = "https://app-staging.m5wtech.com/login"
 
     # --------- Browser Options ---------
+
+    download_dir = os.path.join(os.getcwd(), "downloads")
+    os.makedirs(download_dir, exist_ok=True)
+
     driver = None
     if browser == "chrome":
         options = Options()
-        # options.add_argument("--headless")
+        options.add_argument("--headless")
         options.add_argument("--start-maximized")
-        options.add_argument("--headless=new")  # Headless mode
+        # options.add_argument("--headless=new")  # Headless mode
+        prefs = {
+            "download.default_directory": download_dir,
+            "download.prompt_for_download": False,
+            "download.directory_upgrade": True,
+            "safebrowsing.enabled": True
+        }
+
+        options.add_experimental_option("prefs", prefs)
         driver = webdriver.Chrome(options=options)
         # driver = webdriver.Remote(command_executor=hub_url, options=options)
 
     elif browser == "firefox":
         options = FirefoxOptions()
         options.add_argument("--start-maximized")
-        driver = webdriver.Firefox(options=options)
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference("browser.download.folderList", 2)
+        profile.set_preference("browser.download.dir", download_dir)
+        profile.set_preference(
+            "browser.helperApps.neverAsk.saveToDisk",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+        driver = webdriver.Firefox(options=options, firefox_profile=profile)
         # driver = webdriver.Remote(command_executor=hub_url, options=options)
 
     elif browser == "edge":
         options = EdgeOptions()
         options.add_argument("--start-maximized")
+        prefs = {
+            "download.default_directory": download_dir,
+            "download.prompt_for_download": False,
+            "download.directory_upgrade": True
+        }
+        options.add_experimental_option("prefs", prefs)
         driver = webdriver.Edge(options=options)
         # driver = webdriver.Remote(command_executor=hub_url, options=options)
 

@@ -90,7 +90,9 @@ class ClinetNeedAttentionWidget(UI_Helper):
 
     def download_excel(self):
         print(self.get_currnt_time())
-        self.DOWNLOAD_FOLDER = "/Users/piyushshdravyakar/Downloads"
+        # self.DOWNLOAD_FOLDER = "/Users/piyushshdravyakar/Downloads"
+        self.DOWNLOAD_FOLDER = os.path.join(os.getcwd(), "downloads")
+        # os.makedirs(self.DOWNLOAD_FOLDER, exist_ok=True)
         self.is_enable(self.CLICK_ON_EXCEL_DOWNLOAD_XPATH)
         self.is_element_present(self.CLICK_ON_EXCEL_DOWNLOAD_XPATH)
         self.js_click(self.CLICK_ON_EXCEL_DOWNLOAD_XPATH)
