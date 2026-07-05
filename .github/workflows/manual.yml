@@ -22,14 +22,14 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r e2e-tests/requirement.txt
+          pip install -r e2e_tests/requirement.txt
 
       - name: Create Report Directory
         run: mkdir -p pytest-report
 
       - name: Run Pytest
         run: |
-          pytest e2e-tests/test_cases/test_dashboard/test_client_need_attention.py \
+          pytest e2e_tests/test_cases/test_dashboard/test_client_need_attention.py \
           -v -s \
           --html=pytest-report/report.html \
           --self-contained-html
