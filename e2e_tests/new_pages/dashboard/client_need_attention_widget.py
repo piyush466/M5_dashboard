@@ -121,7 +121,7 @@ class ClinetNeedAttentionWidget(UI_Helper):
         print(self.get_expiry_date)
         expiry_date = datetime.strptime(self.get_expiry_date, "%d-%b-%Y").date()
         today = datetime.today().date()
-        time.sleep(3)
+        time.sleep(6)
         days_difference = (expiry_date - today).days
         self.get_status = self.get_text(self.GET_USER_STATUS_XPATH)
         if days_difference <= 0:
