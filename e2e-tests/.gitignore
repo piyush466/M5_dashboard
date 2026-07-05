@@ -1,0 +1,10 @@
+/allure-results
+/allure-result
+/logs_file
+requirements.txt
+reports
+uihelper/demo.py
+automation.log
+conftest.py
+.venv
+
