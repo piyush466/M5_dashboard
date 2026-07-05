@@ -1,10 +1,10 @@
-name: Python Selenium Tests
+name: Client Needs Attention Widget
 
 on:
   workflow_dispatch:
 
 jobs:
-  selenium-tests:
+  selenium-tests-client-needs_attention-widget:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +33,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}/e2e_tests
         run: |
           pytest test_cases/test_dashboard/test_client_need_attention.py \
-            -v -s -n 2 \
+            -v -s \
             --html=pytest-report/report.html \
             --self-contained-html
 
