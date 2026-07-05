@@ -25,19 +25,21 @@ jobs:
           pip install -r e2e_tests/requirement.txt
 
       - name: Create Report Directory
-        run: mkdir -p pytest-report
+        run: mkdir -p e2e_tests/pytest-report
 
       - name: Run Pytest
         working-directory: e2e_tests
         env:
           PYTHONPATH: ${{ github.workspace }}/e2e_tests
         run: |
-          pytest test_cases/test_dashboard/test_client_need_attention.py -s -v -n 3
-            
+          pytest test_cases/test_dashboard/test_client_need_attention.py \
+            -v -s -n 3 \
+            --html=pytest-report/report.html \
+            --self-contained-html
 
       - name: Upload Test Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pytest-report
-          path: pytest-report/report.html
+          path: e2e_tests/pytest-report/report.html
