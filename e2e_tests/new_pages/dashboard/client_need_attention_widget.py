@@ -72,7 +72,7 @@ class ClinetNeedAttentionWidget(UI_Helper):
         time.sleep(4)
         self.is_element_present(self.CLICK_ON_DROP_DOWN_XPATH)
         self.js_click(self.CLICK_ON_DROP_DOWN_XPATH)
-        all_ele = WebDriverWait(self.driver, 20).until(EC.visibility_of_all_elements_located((By.XPATH,"//span[contains(@id,'radix-')]")))
+        all_ele = WebDriverWait(self.driver, 25).until(EC.visibility_of_all_elements_located((By.XPATH,"//span[contains(@id,'radix-')]")))
         # all_ele = self.driver.find_elements(By.XPATH, "//span[contains(@id,'radix-')]")
         self.all_dropdown_values = []
         for ele in all_ele:
@@ -117,9 +117,9 @@ class ClinetNeedAttentionWidget(UI_Helper):
         self.wait_until_displayed(self.GET_EXPIRY_DATE_XPATH)
         self.get_expiry_date = self.get_text(self.GET_EXPIRY_DATE_XPATH)
         self.wait_until_displayed(self.GET_EXPIRY_DATE_XPATH)
-        time.sleep(3)
         expiry_date = datetime.strptime(self.get_expiry_date, "%d-%b-%Y").date()
         today = datetime.today().date()
+        time.sleep(3)
         days_difference = (expiry_date - today).days
         self.get_status = self.get_text(self.GET_USER_STATUS_XPATH)
         if days_difference <= 0:
