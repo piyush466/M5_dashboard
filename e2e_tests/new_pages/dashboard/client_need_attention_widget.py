@@ -70,6 +70,7 @@ class ClinetNeedAttentionWidget(UI_Helper):
 
     def get_all_drop_down_values(self):
         time.sleep(2)
+        self.is_element_present(self.CLICK_ON_DROP_DOWN_XPATH)
         self.js_click(self.CLICK_ON_DROP_DOWN_XPATH)
         all_ele = WebDriverWait(self.driver, 20).until(EC.visibility_of_all_elements_located((By.XPATH,"//span[contains(@id,'radix-')]")))
         # all_ele = self.driver.find_elements(By.XPATH, "//span[contains(@id,'radix-')]")
