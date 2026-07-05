@@ -40,6 +40,7 @@ def setup(request):
         options = Options()
         # options.add_argument("--headless")
         options.add_argument("--start-maximized")
+        options.add_argument("--headless=new")  # Headless mode
         driver = webdriver.Chrome(options=options)
         # driver = webdriver.Remote(command_executor=hub_url, options=options)
 
