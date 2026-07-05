@@ -29,7 +29,8 @@ jobs:
 
       - name: Run Pytest
         run: |
-          export PYTHONPATH=$GITHUB_WORKSPACE/e2e_tests
+          cd e2e_tests
+          export PYTHONPATH=$PWD
           pytest e2e_tests/test_cases/test_dashboard/test_client_need_attention.py 
           
 
