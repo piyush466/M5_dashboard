@@ -33,7 +33,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}/e2e_tests
         run: |
           pytest test_cases/test_dashboard/test_client_need_attention.py \
-            -v -s -n 3 \
+            -v -s -n 2 \
             --html=pytest-report/report.html \
             --self-contained-html
 
