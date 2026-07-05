@@ -118,6 +118,7 @@ class ClinetNeedAttentionWidget(UI_Helper):
         self.is_element_present(self.GET_EXPIRY_DATE_XPATH)
         self.get_expiry_date = self.get_text(self.GET_EXPIRY_DATE_XPATH)
         self.wait_until_displayed(self.GET_EXPIRY_DATE_XPATH)
+        print(self.get_expiry_date)
         expiry_date = datetime.strptime(self.get_expiry_date, "%d-%b-%Y").date()
         today = datetime.today().date()
         time.sleep(3)
