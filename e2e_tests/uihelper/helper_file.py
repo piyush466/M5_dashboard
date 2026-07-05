@@ -110,7 +110,7 @@ class UI_Helper:
     def is_element_present(self, by_locator):
         try:
             self.log.info(f"Checking if element is present: {by_locator}")
-            WebDriverWait(self.driver, 15).until(EC.presence_of_element_located(by_locator))
+            WebDriverWait(self.driver, 17).until(EC.presence_of_element_located(by_locator))
             self.log.info(f"Element is present: {by_locator}")
         except Exception as e:
             self.log.error(f"Element not present: {by_locator} - Error: {e}")
