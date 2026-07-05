@@ -112,12 +112,12 @@ class ClinetNeedAttentionWidget(UI_Helper):
 
 
     def critical_status_displayed_less_than_today(self):
-        time.sleep(4)
+        time.sleep(3)
         self.is_displayed(self.GET_EXPIRY_DATE_XPATH)
         self.wait_until_displayed(self.GET_EXPIRY_DATE_XPATH)
         self.get_expiry_date = self.get_text(self.GET_EXPIRY_DATE_XPATH)
         self.wait_until_displayed(self.GET_EXPIRY_DATE_XPATH)
-        time.sleep(2)
+        time.sleep(3)
         expiry_date = datetime.strptime(self.get_expiry_date, "%d-%b-%Y").date()
         today = datetime.today().date()
         days_difference = (expiry_date - today).days
