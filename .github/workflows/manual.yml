@@ -31,7 +31,7 @@ jobs:
         run: |
           cd e2e_tests
           export PYTHONPATH=$PWD
-          pytest e2e_tests/test_cases/test_dashboard/test_client_need_attention.py 
+          pytest test_cases/test_dashboard/test_client_need_attention.py 
           
 
       - name: Upload Test Report
