@@ -28,11 +28,12 @@ jobs:
         run: mkdir -p pytest-report
 
       - name: Run Pytest
+        working-directory: e2e_tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}/e2e_tests
         run: |
-          cd e2e_tests
-          export PYTHONPATH=$PWD
           pytest test_cases/test_dashboard/test_client_need_attention.py 
-          
+            
 
       - name: Upload Test Report
         if: always()
