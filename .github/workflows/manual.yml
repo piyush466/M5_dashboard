@@ -1,15 +1,6 @@
 name: Python Selenium Tests
 on:
   workflow_dispatch:
-    inputs:
-      browser:
-        description: 'Browser to use (e.g., chrome, firefox, edge)'
-        required: true
-        default: 'chrome'
-      headless:
-        description: 'Run tests in headless mode (true/false)'
-        required: true
-        default: 'true'
 
 jobs:
   test01:
