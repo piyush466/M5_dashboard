@@ -69,7 +69,7 @@ class ClinetNeedAttentionWidget(UI_Helper):
         self.scroll_down_toElement(self.GET_ALL_COLUMNS_NAME_XPATH)
 
     def get_all_drop_down_values(self):
-        time.sleep(2)
+        time.sleep(4)
         self.is_element_present(self.CLICK_ON_DROP_DOWN_XPATH)
         self.js_click(self.CLICK_ON_DROP_DOWN_XPATH)
         all_ele = WebDriverWait(self.driver, 20).until(EC.visibility_of_all_elements_located((By.XPATH,"//span[contains(@id,'radix-')]")))
@@ -79,12 +79,10 @@ class ClinetNeedAttentionWidget(UI_Helper):
             self.all_dropdown_values.append(ele.text)
 
     def get_all_days_dropdown_values(self):
-        time.sleep(3)
+        time.sleep(4)
         self.is_element_present(self.CLICK_ON_DAYS_DROPDOWN_XPATH)
         self.js_click(self.CLICK_ON_DAYS_DROPDOWN_XPATH)
         all_days = WebDriverWait(self.driver, 20).until(EC.visibility_of_all_elements_located((By.XPATH,"//button[contains(@class,'flex w-full items-center gap-2')]/span")))
-        # all_days = self.driver.find_elements(By.XPATH,
-        #                 "//button[contains(@class,'flex w-full items-center gap-2')]/span")
         self.all_days_dropdown_values = []
         for days in all_days:
             self.all_days_dropdown_values.append(days.text)

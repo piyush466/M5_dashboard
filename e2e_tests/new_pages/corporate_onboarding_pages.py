@@ -1,7 +1,5 @@
 import time
-from os import times
 
-import driver
 from selenium.webdriver.common.by import By
 
 from locators.corporate_onboarding_locators import CorporateOnboard

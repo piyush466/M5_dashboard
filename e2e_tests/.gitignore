@@ -5,6 +5,6 @@ requirements.txt
 reports
 uihelper/demo.py
 automation.log
-new_conftest.py
+con.py
 .venv
 
