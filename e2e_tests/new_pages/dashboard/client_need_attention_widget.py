@@ -61,6 +61,8 @@ class ClinetNeedAttentionWidget(UI_Helper):
     GET_TEXT_FROM_ONBOARDING_ACCOUNT_XPATH = (By.XPATH,
                                      "//h2[contains(@class,'capitalize text-ellipsis')]")
 
+    GET_ALL_USERS_NAME_XPATH = (By.XPATH,
+                                '//div[@data-widget-id="Client Needs Attention"]//tbody/tr/td/div')
 
     def __init__(self,driver):
         self.driver = driver
@@ -96,6 +98,7 @@ class ClinetNeedAttentionWidget(UI_Helper):
         self.is_element_present(self.CLICK_ON_EXCEL_DOWNLOAD_XPATH)
         self.js_click(self.CLICK_ON_EXCEL_DOWNLOAD_XPATH)
         self.hover_onElement(self.HOVER_ON_BELL_ICON_XPATH)
+        self.is_element_present(self.CLICK_ON_DOWNLOAD_BUTTON_XPATH)
         self.until_clickable(self.CLICK_ON_DOWNLOAD_BUTTON_XPATH)
         time.sleep(2)
         self.downloaded = False
@@ -106,10 +109,13 @@ class ClinetNeedAttentionWidget(UI_Helper):
                 break
 
     def search_user_name_in_search_box(self):
-        self_username = self.get_text(self.GET_FIRST_NAME_XPATH)
-        print(self_username)
-        self.send_key(self.SEND_USER_NAME_IN_SEARCH_XPATH, self_username)
-
+        self.username = self.get_text(self.GET_FIRST_NAME_XPATH).lower()
+        self.send_key(self.SEND_USER_NAME_IN_SEARCH_XPATH, self.username)
+        self.get_usernames = WebDriverWait(self.driver,15).until(EC.visibility_of_all_elements_located((By.XPATH,'//div[@data-widget-id="Client Needs Attention"]//tbody/tr/td/div/span')))
+        self.all_usernames_in_list = []
+        for username in self.get_usernames:
+            all_username = username.text
+            self.all_usernames_in_list.append(all_username.lower())
 
     def critical_status_displayed_less_than_today(self):
         time.sleep(3)

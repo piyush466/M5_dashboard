@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
+
+from new_pages.login_page1 import Login
 from utilities.configpar import ConfigReader
 import os
 
@@ -92,3 +94,4 @@ def setup(request):
 
     yield driver
     driver.quit()
+
