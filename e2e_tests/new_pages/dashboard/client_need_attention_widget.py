@@ -1,6 +1,7 @@
 from datetime import datetime
 import time
 import os
+import re
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -63,6 +64,19 @@ class ClinetNeedAttentionWidget(UI_Helper):
 
     GET_ALL_USERS_NAME_XPATH = (By.XPATH,
                                 '//div[@data-widget-id="Client Needs Attention"]//tbody/tr/td/div')
+
+    CLICK_ON_IRPQ_NEXT_REVIEW_DATE_XPATH = (By.XPATH,
+                                            "//*[text()='IRPQ Next Review']")
+
+    CLICK_OM_RISK_ANALYSIS_FORM_XPATH = (By.XPATH,
+                                         "//*[text()='Risk Analysis']")
+
+    CLICK_ON_VIEW_RISK_PROFILE_BUTTON_XPATH = (By.XPATH,
+                                               "//*[text()='View Risk Profile']")
+
+    GET_IRPQ_DATE_FROM_RISK_ANALYSIS_FORM_XPATH = (By.XPATH,
+                                                   "//h3[text()='Next Review Date']//parent::div/p")
+
 
     def __init__(self,driver):
         self.driver = driver
@@ -152,7 +166,23 @@ class ClinetNeedAttentionWidget(UI_Helper):
         self.get_expected_text = self.get_text(self.GET_TEXT_FROM_ONBOARDING_ACCOUNT_XPATH).lower()
 
 
+    def select_irpq_review_date(self):
+        time.sleep(4)
+        self.is_element_present(self.CLICK_ON_DROP_DOWN_XPATH)
+        self.js_click(self.CLICK_ON_DROP_DOWN_XPATH)
+        self.js_click(self.CLICK_ON_IRPQ_NEXT_REVIEW_DATE_XPATH)
 
+    def click_on_take_action_and_go_risk_analysis_form(self):
+        time.sleep(30)
+        self.irpq_next_review_dt = self.get_text(self.GET_EXPIRY_DATE_XPATH)
+        self.irpq_expiry_date = str(datetime.strptime(self.irpq_next_review_dt, "%d-%b-%Y").date())
+        self.until_clickable(self.CLICK_ON_TAKE_ACTION_BUTTON_XPATH)
+        self.scroll_down_toElement(self.CLICK_OM_RISK_ANALYSIS_FORM_XPATH)
+        self.do_click(self.CLICK_OM_RISK_ANALYSIS_FORM_XPATH)
+        self.do_click(self.CLICK_ON_VIEW_RISK_PROFILE_BUTTON_XPATH)
+        self.get_irpq_date_from_risk_form = self.get_text(self.GET_IRPQ_DATE_FROM_RISK_ANALYSIS_FORM_XPATH)
+        cleaned_date = re.sub(r'(\d+)(st|nd|rd|th)', r'\1', self.get_irpq_date_from_risk_form)
+        self.formatted_date = datetime.strptime(cleaned_date, "%B %d, %Y").strftime("%Y-%m-%d")
 
 
 

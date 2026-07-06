@@ -1,3 +1,4 @@
+from bs4 import element
 from faker import Faker
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.select import Select
@@ -77,6 +78,16 @@ class UI_Helper:
         except Exception as e:
             self.log.error(f"Failed to get text from element {by_locator}: {e}")
 
+    def is_selected(self, by_locator):
+        try:
+            self.log.info(f"Checking if element is selected: {by_locator}")
+            element = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located(by_locator)).is_selected()
+            self.log.info(f"Element is selected: {by_locator}")
+            return element
+        except Exception as e:
+            self.log.error(f"Failed to check selected status: {by_locator}: {e}")
+            raise
+
     def is_displayed(self, by_locator):
         try:
             self.log.info(f"Checking if element is displayed: {by_locator}")
@@ -85,6 +96,7 @@ class UI_Helper:
             return element
         except Exception as e:
             self.log.error(f"Failed to check display status of element {by_locator}: {e}")
+            raise
 
 
     def is_enable(self, by_locator):
@@ -124,6 +136,7 @@ class UI_Helper:
             self.log.info(f"JS click executed on element: {by_locator}")
         except Exception as e:
             self.log.error(f"JS click failed on element {by_locator}: {e}")
+            raise
 
     def scroll_down_toElement(self, by_locator):
         try:
@@ -133,6 +146,7 @@ class UI_Helper:
             self.log.info(f"Scrolled to element: {by_locator}")
         except Exception as e:
             self.log.error(f"Failed to scroll to element {by_locator}: {e}")
+            raise
 
     def hover_onElement(self, by_locator):
         action = ActionChains(self.driver)

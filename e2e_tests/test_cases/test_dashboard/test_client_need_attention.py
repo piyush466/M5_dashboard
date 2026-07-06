@@ -76,3 +76,16 @@ class TestClientNeedAttention:
         client_attention.assertion(
             client_attention.first_name,
             client_attention.get_expected_text)
+
+
+    def test_09_verify_user_can_select_irpq_next_review_date(self,setup):
+        client_attention = self.open_client_need_attention_widget(setup)
+        client_attention.select_irpq_review_date()
+        client_attention.assertion(client_attention.is_displayed(client_attention.CLICK_ON_IRPQ_NEXT_REVIEW_DATE_XPATH),True)
+
+
+    def test_10_verify_irpq_next_review_date_match_risk_analysis_form(self,setup):
+        client_attention = self.open_client_need_attention_widget(setup)
+        client_attention.select_irpq_review_date()
+        client_attention.click_on_take_action_and_go_risk_analysis_form()
+        client_attention.assertion(client_attention.irpq_expiry_date,client_attention.formatted_date)
