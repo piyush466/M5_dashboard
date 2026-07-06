@@ -43,7 +43,7 @@ def setup(request):
     driver = None
     if browser == "chrome":
         options = Options()
-        # options.add_argument("--headless")
+        options.add_argument("--headless")
         options.add_argument("--start-maximized")
         # options.add_argument("--headless=new")  # Headless mode
         prefs = {
