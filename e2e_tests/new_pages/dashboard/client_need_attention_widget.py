@@ -176,6 +176,7 @@ class ClinetNeedAttentionWidget(UI_Helper):
         time.sleep(30)
         self.irpq_next_review_dt = self.get_text(self.GET_EXPIRY_DATE_XPATH)
         self.irpq_expiry_date = str(datetime.strptime(self.irpq_next_review_dt, "%d-%b-%Y").date())
+        print(self.irpq_expiry_date)
         self.until_clickable(self.CLICK_ON_TAKE_ACTION_BUTTON_XPATH)
         self.scroll_down_toElement(self.CLICK_OM_RISK_ANALYSIS_FORM_XPATH)
         self.do_click(self.CLICK_OM_RISK_ANALYSIS_FORM_XPATH)
@@ -183,6 +184,7 @@ class ClinetNeedAttentionWidget(UI_Helper):
         self.get_irpq_date_from_risk_form = self.get_text(self.GET_IRPQ_DATE_FROM_RISK_ANALYSIS_FORM_XPATH)
         cleaned_date = re.sub(r'(\d+)(st|nd|rd|th)', r'\1', self.get_irpq_date_from_risk_form)
         self.formatted_date = datetime.strptime(cleaned_date, "%B %d, %Y").strftime("%Y-%m-%d")
+        print(self.formatted_date)
 
 
 
